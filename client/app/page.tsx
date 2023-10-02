@@ -1,3 +1,4 @@
+"use client";
 import { useQuery, gql } from "@apollo/client";
 import { GET_POSTS, GET_USERS } from "../src/posts";
 import { GetUsersQuery, GetPostsQuery } from "../src/gql/graphql";
