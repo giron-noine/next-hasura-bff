@@ -12,6 +12,7 @@ const createApolloClient = () => {
     cache: new InMemoryCache(),
   });
 };
+
 export const initializeApollo = (initialState = null) => {
   const _apolloClient = apolloClient ?? createApolloClient();
   // For SSG and SSR always create a new Apollo Client

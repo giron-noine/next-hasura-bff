@@ -1,9 +1,15 @@
 import { memo, useEffect, useRef } from "react";
-import EditorJS from "@editorjs/editorjs";
+import EditorJS, { OutputData } from "@editorjs/editorjs";
 import TOOLS from "./tools";
 
-const CustomEditor = ({ data, onChange, holder }) => {
-  const ref = useRef(null);
+type Props = {
+  data?: OutputData;
+  onChange(val: OutputData): void;
+  holder: string;
+};
+
+const CustomEditor = ({ data, onChange, holder }: Props) => {
+  const ref = useRef<EditorJS>();
 
   useEffect(() => {
     if (!ref.current) {
@@ -23,13 +29,9 @@ const CustomEditor = ({ data, onChange, holder }) => {
     return () => {
       if (ref.current && ref.current.destroy) ref.current.destroy();
     };
-  }, []);
+  }, [holder, onChange, data]);
 
-  return (
-    <>
-      <div id={holder}></div>
-    </>
-  );
+  return <div id={holder} />;
 };
 
 export default memo(CustomEditor);
