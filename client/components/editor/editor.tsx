@@ -16,7 +16,7 @@ const CustomEditor = ({ data, onChange, holder }: Props) => {
       const editor = new EditorJS({
         holder: holder,
         tools: TOOLS,
-        autofocus: true,
+        // autofocus: true,
         data,
         placeholder: "Start writing your article here...",
         async onChange(api) {
@@ -29,7 +29,7 @@ const CustomEditor = ({ data, onChange, holder }: Props) => {
     return () => {
       if (ref.current && ref.current.destroy) ref.current.destroy();
     };
-  }, [holder, onChange, data]);
+  }, []);
 
   return <div id={holder} />;
 };
