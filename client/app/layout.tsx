@@ -1,4 +1,6 @@
 import { ApolloWrapper } from "../lib/apolloWrapper";
+import { Auth0ProviderWrapper } from "../lib/auth0ProviderWrapper";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
 
 type T = {
   children: React.ReactNode;
@@ -11,10 +13,16 @@ export const metadata = {
 
 export default function RootLayout({ children }: T) {
   return (
-    <ApolloWrapper>
-      <html lang="ja">
-        <body>{children}</body>
-      </html>
-    </ApolloWrapper>
+    // <Auth0ProviderWrapper>
+
+    <html lang="ja">
+      <UserProvider>
+        <ApolloWrapper>
+          <body>{children}</body>
+        </ApolloWrapper>
+      </UserProvider>
+    </html>
+
+    // </Auth0ProviderWrapper>
   );
 }

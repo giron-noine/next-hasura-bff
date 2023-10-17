@@ -1,4 +1,3 @@
-import { useSearchParams } from "next/navigation";
 import { ModalHome } from "../../../../components/modal/modalHome";
 
 const Idpage = ({ params }: { params: { id: string } }) => {

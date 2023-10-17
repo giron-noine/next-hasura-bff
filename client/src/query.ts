@@ -2,19 +2,20 @@ import { gql } from "@apollo/client";
 
 export const GET_USERS = gql`
   query GetUsers {
-    user {
-      name
+    users {
       id
+      name
+      last_seen
     }
   }
 `;
 
-export const GET_POSTS = gql`
-  query GetPosts {
+export const GET_POST = gql`
+  query GetPost {
     post {
       id
-      post
-      date
+      content
+      create
     }
   }
 `;

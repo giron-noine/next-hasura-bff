@@ -13,8 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  query GetUsers {\n    user {\n      name\n      id\n    }\n  }\n": types.GetUsersDocument,
-    "\n  query GetPosts {\n    post {\n      id\n      post\n      date\n    }\n  }\n": types.GetPostsDocument,
+    "\n  query GetUsers {\n    users {\n      id\n      name\n      last_seen\n    }\n  }\n": types.GetUsersDocument,
+    "\n  query GetPost {\n    post {\n      id\n      content\n      create\n    }\n  }\n": types.GetPostDocument,
 };
 
 /**
@@ -34,11 +34,11 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query GetUsers {\n    user {\n      name\n      id\n    }\n  }\n"): (typeof documents)["\n  query GetUsers {\n    user {\n      name\n      id\n    }\n  }\n"];
+export function graphql(source: "\n  query GetUsers {\n    users {\n      id\n      name\n      last_seen\n    }\n  }\n"): (typeof documents)["\n  query GetUsers {\n    users {\n      id\n      name\n      last_seen\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query GetPosts {\n    post {\n      id\n      post\n      date\n    }\n  }\n"): (typeof documents)["\n  query GetPosts {\n    post {\n      id\n      post\n      date\n    }\n  }\n"];
+export function graphql(source: "\n  query GetPost {\n    post {\n      id\n      content\n      create\n    }\n  }\n"): (typeof documents)["\n  query GetPost {\n    post {\n      id\n      content\n      create\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

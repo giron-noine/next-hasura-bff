@@ -1,18 +1,20 @@
 "use client";
 import { useQuery, gql } from "@apollo/client";
-import { GET_POSTS, GET_USERS } from "../src/posts";
-import { GetUsersQuery, GetPostsQuery } from "../src/gql/graphql";
+import { GET_POST, GET_USERS } from "../src/query";
+import { GetUsersQuery, GetPostQuery } from "../src/gql/graphql";
 import { use, useEffect, useState } from "react";
 import getUser from "../components/fetch/getUser";
+import Link from "next/link";
+import ProfileClient from "../components/auth/profileClient";
 
 export default function Home() {
-  const [serverPostData, setserverPostData] = useState<GetPostsQuery>();
+  // const [serverPostData, setserverPostData] = useState<GetPostsQuery>();
   const { data, error } = useQuery<GetUsersQuery>(GET_USERS);
-  const { data: postData, error: postsError } = useQuery<GetPostsQuery>(GET_POSTS);
+  const { data: postData, error: postsError } = useQuery<GetPostQuery>(GET_POST);
 
   const getDatas = async () => {
     const data = await getUser();
-    setserverPostData(data);
+    // setserverPostData(data);
   };
   getDatas();
 
@@ -20,8 +22,11 @@ export default function Home() {
     <>
       <div>
         <h2>Users table</h2>
-        {data?.user.map((user) => (
-          <p key={user.id}>{user.name}</p>
+        {data?.users.map((user) => (
+          <>
+            <p key={user.id}>{user.name}</p>
+            <p>{user.last_seen}</p>
+          </>
         ))}
       </div>
 
@@ -29,21 +34,27 @@ export default function Home() {
         <h2>Posts table</h2>
         {postData?.post.map((post) => (
           <div key={post.id}>
-            <p>{post.post}</p>
-            <span>{post.date}</span>
+            <p>{post.content}</p>
+            <span>{post.create}</span>
           </div>
         ))}
       </div>
 
       <div>
         <h2>Server Component</h2>
-        {serverPostData?.post.map((post) => (
+        {/* {serverPostData?.post.map((post) => (
           <div key={post.id}>
             <p>{post.post}</p>
             <span>{post.date}</span>
           </div>
-        ))}
+        ))} */}
       </div>
+
+      {/* <Link href="/auth">Auth Page</Link> */}
+      <a href="/api/auth/login">Login</a>
+      <a href="/api/auth/logout">Logout</a>
+
+      <ProfileClient />
     </>
   );
 }
